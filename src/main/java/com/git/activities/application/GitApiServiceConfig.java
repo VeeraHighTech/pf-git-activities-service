@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class GitApiServiceConfig {
 
-	@Value("${git.api.service.repo.url}")
+	@Value("${git.api.service.url}")
 	private String gitApiServiceRepoUrl;
 
 	@Value("${git.api.service.username}")
@@ -15,10 +15,6 @@ public class GitApiServiceConfig {
 	@Value("${git.api.service.password}")
 	private String gitApiServicePassword;
 	
-	@Value("${git.api.repo.commit.url}")
-	private String gitApiCommitUrl;
-	
-
 
 	public String getGitApiServiceRepoUrl() {
 		return gitApiServiceRepoUrl;
@@ -26,14 +22,6 @@ public class GitApiServiceConfig {
 
 	public void setGitApiServiceRepoUrl(String gitApiServiceRepoUrl) {
 		this.gitApiServiceRepoUrl = gitApiServiceRepoUrl;
-	}
-
-	public String getGitApiCommitUrl() {
-		return gitApiCommitUrl;
-	}
-
-	public void setGitApiCommitUrl(String gitApiCommitUrl) {
-		this.gitApiCommitUrl = gitApiCommitUrl;
 	}
 
 	public String getGitApiServiceUserName() {

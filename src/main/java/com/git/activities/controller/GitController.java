@@ -1,7 +1,5 @@
 package com.git.activities.controller;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -23,7 +21,7 @@ import io.swagger.annotations.ApiResponses;
 @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 public class GitController {
 	
-	 private static final Logger logger = LoggerFactory.getLogger(GitController.class);
+	// private static final Logger logger = LoggerFactory.getLogger(GitController.class);
 
 	@Autowired
 	IGitService iGitService;
@@ -80,5 +78,7 @@ public class GitController {
 
 		return responseEntity;
 	}
+	
+	
 	
 }

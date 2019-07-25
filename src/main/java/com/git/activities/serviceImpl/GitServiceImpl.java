@@ -26,9 +26,9 @@ public class GitServiceImpl implements IGitService {
 	public ResponseEntity<Object> getRepositories() {
 
 		ResponseEntity<Object> response = null;
-
+		String url = prepareRestTemplateUrl("repos",  null);
 		ResponseEntity<List<Object>> restResponse = serviceTemplate.exchange(
-				gitApiServiceConfig.getGitApiServiceRepoUrl(), HttpMethod.GET, null,
+				url, HttpMethod.GET, null,
 				new ParameterizedTypeReference<List<Object>>() {
 				});
 
@@ -40,7 +40,7 @@ public class GitServiceImpl implements IGitService {
 	@Override
 	public ResponseEntity<Object> getCommitsFromService(String serviceName) {
 		ResponseEntity<Object> response = null;
-		String url = gitApiServiceConfig.getGitApiCommitUrl() + "/" + serviceName + "/commits";
+		String url = prepareRestTemplateUrl("commits",  serviceName);
 
 		ResponseEntity<List<Object>> restResponse = serviceTemplate.exchange(url, HttpMethod.GET, null,
 				new ParameterizedTypeReference<List<Object>>() {
@@ -52,10 +52,25 @@ public class GitServiceImpl implements IGitService {
 	}
 	
 	
-	
-	
-	
-	
-	
+	@SuppressWarnings("unused")
+	private String prepareRestTemplateUrl(String type, String servicename) {
 
+		String gitHubUserName = "VeeraHighTech";
+
+		String url = null;
+
+		if (type.equalsIgnoreCase("repos")) {
+		//	"repos_url": "https://api.github.com/users/VeeraHighTech/repos",
+			url = gitApiServiceConfig.getGitApiServiceRepoUrl() + "/users/" + gitHubUserName + "/repos";
+			
+		}
+
+		if (type.equalsIgnoreCase("commits")) {
+			//  "commits_url": "https://api.github.com/repos/VeeraHighTech/vrk-mongodb-springboot-springdata/commits{/sha}",
+			url = gitApiServiceConfig.getGitApiServiceRepoUrl() + "/repos/"+gitHubUserName+"/" + servicename + "/commits";
+		}
+		return url;
+	}
+	
+	
 }
