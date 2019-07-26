@@ -1,10 +1,11 @@
 package com.git.activities.service;
 
-import org.springframework.http.ResponseEntity;
+import java.util.List;
+
+import com.git.activities.dto.GitRepositoriesResponse;
 
 public interface IGitService {
 
-	public ResponseEntity<Object> getRepositories(); 
+	public List<GitRepositoriesResponse> getRepositoriesAndCommits(String ServiceName, String ownerName); 
 	
-	public ResponseEntity<Object> getCommitsFromService(String ServiceName);
 }

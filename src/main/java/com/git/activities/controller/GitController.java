@@ -1,5 +1,7 @@
 package com.git.activities.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.git.activities.dto.GitRepositoriesResponse;
 import com.git.activities.service.IGitService;
 
 import io.swagger.annotations.ApiOperation;
@@ -29,20 +32,27 @@ public class GitController {
 	@ApiOperation(value = "Get Repositories", notes = "getRepositories", response = String.class)
 	@ApiResponses({
 			@ApiResponse(code = 200, message = "Successfully retrived  repos", response = String.class) })
-	@RequestMapping(value = "/getRepositories", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/repositories/owner/{owner-name}/service/{service-name}/commits", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public ResponseEntity<Object> getRepositories() {
+	public ResponseEntity<Object> getRepositories(
+			@ApiParam(value = "owner-name") @PathVariable(name = "owner-name") String ownername,
+			@ApiParam(value = "service-name") @PathVariable(name = "service-name") String serviceName) {
 
+		 if(serviceName.equalsIgnoreCase("undefined")) {
+			 serviceName =null;
+		 }
+		
 		ResponseEntity<Object> responseEntity = null;
+		List<GitRepositoriesResponse> listOfRepos=null;
 
 		try {
 
-			responseEntity = iGitService.getRepositories();
+			listOfRepos = iGitService.getRepositoriesAndCommits(serviceName, ownername);
 
-			if (responseEntity != null) {
-				responseEntity = new ResponseEntity<>(responseEntity, HttpStatus.OK);
+			if (listOfRepos != null) {
+				responseEntity = new ResponseEntity<>(listOfRepos, HttpStatus.OK);
 			} else {
-				responseEntity = new ResponseEntity<>(responseEntity, HttpStatus.NOT_FOUND);
+				responseEntity = new ResponseEntity<>(listOfRepos, HttpStatus.NOT_FOUND);
 			}
 
 		} catch (Exception ex) {
@@ -52,33 +62,6 @@ public class GitController {
 		return responseEntity;
 	}
 
-	@ApiOperation(value = "Get Repositories", notes = "getRepositories", response = String.class)
-	@ApiResponses({
-			@ApiResponse(code = 200, message = "Successfully retrived  repos", response = String.class) })
-	@RequestMapping(value = "/repositories/service/{service-name}/commits", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	@ResponseBody
-	public ResponseEntity<Object> getCommitsFromService(
-			@ApiParam(value = "service-name") @PathVariable(name = "service-name", required = true) String serviceName){
-	
-		ResponseEntity<Object> responseEntity = null;
-
-		try {
-
-			responseEntity = iGitService.getCommitsFromService(serviceName);
-
-			if (responseEntity != null) {
-				responseEntity = new ResponseEntity<>(responseEntity, HttpStatus.OK);
-			} else {
-				responseEntity = new ResponseEntity<>(responseEntity, HttpStatus.NOT_FOUND);
-			}
-
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-
-		return responseEntity;
-	}
-	
 	
 	
 }

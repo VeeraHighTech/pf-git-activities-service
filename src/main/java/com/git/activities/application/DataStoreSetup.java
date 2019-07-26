@@ -1,4 +1,4 @@
-/*package com.git.activities.application;
+package com.git.activities.application;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -9,12 +9,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource; 
  
- 
- @Configuration 
- @EnableJpaRepositories(basePackages = { "com.git.activities.*" }) 
- @ComponentScan(value = "com.git.activities.*") 
- @EntityScan(basePackages = { "com.git.activities.*" }) 
-
+ @Configuration
+ @EnableJpaRepositories(basePackages = {"com.git.activities.repo" })
+ @ComponentScan(value = "com.git.activities.*")
+ @EntityScan(basePackages = { "com.git.activities.entities" }) 
 public class DataStoreSetup {
 
 	@Value("${spring.datasource.url}")
@@ -28,7 +26,7 @@ public class DataStoreSetup {
 
 	@Value("${spring.datasource.driver-class-name}")
 	String databaseDriver;
-
+	
 
 	@Bean
 	public DataSource dataSource() {
@@ -40,18 +38,5 @@ public class DataStoreSetup {
 		dataSource.setPassword(databasePassword);
 		return dataSource;
 	}
-
-	@Bean
-	LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource, Environment env) {
-		LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
-		entityManagerFactoryBean.setDataSource(dataSource);
-		entityManagerFactoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
-		//entityManagerFactoryBean.setPackagesToScan("com.deltadental.platform.entity");
-		Properties jpaProperties = new Properties();
-		jpaProperties.setProperty("hibernate.dialect", mariaDB53Dialect);
-		entityManagerFactoryBean.setJpaProperties(jpaProperties);
-		return entityManagerFactoryBean;
-	}
-
+	
 } 
-*/
