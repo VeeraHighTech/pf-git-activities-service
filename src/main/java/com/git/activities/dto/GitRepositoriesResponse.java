@@ -1,5 +1,6 @@
 package com.git.activities.dto;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,36 +8,44 @@ public class GitRepositoriesResponse {
 
 	
     private Long id;
-    private String repoName;
-    List<GitDailyCommitsResponse> gitdailycommits = new ArrayList<>();
+    private String name;
+    private Date created_at;
+    private Date updated_at;
+    List<CommitsResponse> gitdailycommits = new ArrayList<>();
     
-    
-	public Long getId() {
+	
+    public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getRepoName() {
-		return repoName;
+	
+	public String getName() {
+		return name;
 	}
-	public void setRepoName(String repoName) {
-		this.repoName = repoName;
+	public void setName(String name) {
+		this.name = name;
 	}
-	public List<GitDailyCommitsResponse> getGitdailycommits() {
+	public Date getCreated_at() {
+		return created_at;
+	}
+	public void setCreated_at(Date created_at) {
+		this.created_at = created_at;
+	}
+	public Date getUpdated_at() {
+		return updated_at;
+	}
+	public void setUpdated_at(Date updated_at) {
+		this.updated_at = updated_at;
+	}
+	public List<CommitsResponse> getGitdailycommits() {
 		return gitdailycommits;
 	}
-	public void setGitdailycommits(List<GitDailyCommitsResponse> gitdailycommits) {
+	public void setGitdailycommits(List<CommitsResponse> gitdailycommits) {
 		this.gitdailycommits = gitdailycommits;
 	}
 	
-	
-	@Override
-	public String toString() {
-		return "GitRepositoriesResponse [id=" + id + ", repoName=" + repoName + ", gitdailycommits=" + gitdailycommits
-				+ "]";
-	}
-    
 }
 
     

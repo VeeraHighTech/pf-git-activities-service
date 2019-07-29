@@ -32,7 +32,7 @@ public class GitController {
 	@ApiOperation(value = "Get Repositories", notes = "getRepositories", response = String.class)
 	@ApiResponses({
 			@ApiResponse(code = 200, message = "Successfully retrived  repos", response = String.class) })
-	@RequestMapping(value = "/repositories/owner/{owner-name}/service/{service-name}/commits", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/repositories/owner/{owner-name}/service/{service-name}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public ResponseEntity<Object> getRepositories(
 			@ApiParam(value = "owner-name") @PathVariable(name = "owner-name") String ownername,

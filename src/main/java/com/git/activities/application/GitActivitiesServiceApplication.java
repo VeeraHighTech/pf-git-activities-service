@@ -20,9 +20,9 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class GitActivitiesServiceApplication {
 	
 	
-
 	public static void main(String[] args) {
 		SpringApplication.run(GitActivitiesServiceApplication.class, args);
+		
 	}
 	
 	@Bean

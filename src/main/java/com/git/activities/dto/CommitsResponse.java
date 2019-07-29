@@ -10,9 +10,6 @@ public class CommitsResponse {
 	private int days[]=new int[7];
 	
 	
-	
-	
-	
 	public int getTotal() {
 		return total;
 	}
