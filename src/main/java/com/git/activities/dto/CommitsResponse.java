@@ -5,21 +5,21 @@ import java.util.Arrays;
 public class CommitsResponse {
 
 	
-	private int total;
-	private long week;
+	private Long total;
+	private Long week;
 	private int days[]=new int[7];
 	
 	
-	public int getTotal() {
+	public Long getTotal() {
 		return total;
 	}
-	public void setTotal(int total) {
+	public void setTotal(Long total) {
 		this.total = total;
 	}
-	public long getWeek() {
+	public Long getWeek() {
 		return week;
 	}
-	public void setWeek(long week) {
+	public void setWeek(Long week) {
 		this.week = week;
 	}
 	public int[] getDays() {

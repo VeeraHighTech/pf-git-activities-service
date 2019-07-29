@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS repo_daily_statistics(
   FOREIGN KEY (repo_id) REFERENCES repositories(id));
   
   
- CREATE TABLE IF NOT EXISTS repo_weekly_staticts(
+ CREATE TABLE IF NOT EXISTS repo_weekly_statistics(
   id INT(20) NOT NULL UNIQUE,
   repo_id INT(20),
   week_of DATE,

@@ -6,7 +6,7 @@ import java.util.List;
 public class CommitDetails {
 
 	private Date weekOf;
-	private int totalnumberOfCommits;
+	private Long totalnumberOfCommits;
 	List<DailyCommitsDetails> dcommits;
 
 	public Date getWeekOf() {
@@ -17,11 +17,12 @@ public class CommitDetails {
 		this.weekOf = weekOf;
 	}
 
-	public int getTotalnumberOfCommits() {
+
+	public Long getTotalnumberOfCommits() {
 		return totalnumberOfCommits;
 	}
 
-	public void setTotalnumberOfCommits(int totalnumberOfCommits) {
+	public void setTotalnumberOfCommits(Long totalnumberOfCommits) {
 		this.totalnumberOfCommits = totalnumberOfCommits;
 	}
 
