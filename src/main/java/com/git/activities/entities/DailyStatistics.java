@@ -10,8 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 @Entity
-@Table(name = "repo_daily_statistics", schema = "repos_db")
-public class RepoDailyStatistics implements Serializable {
+public class DailyStatistics implements Serializable {
 
 
 	private static final long serialVersionUID = 1L;

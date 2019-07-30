@@ -3,10 +3,10 @@ package com.git.activities.repo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.git.activities.entities.Repositories;
+import com.git.activities.entities.RepoDetails;
 
 @Repository
-public interface ReposRepository extends JpaRepository<Repositories, Long> {
+public interface ReposRepository extends JpaRepository<RepoDetails, Long> {
 
-	public Repositories findByRepoName(String repoName);
+	public RepoDetails findByRepoName(String repoName);
 }

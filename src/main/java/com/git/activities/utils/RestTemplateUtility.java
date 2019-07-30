@@ -1,26 +1,30 @@
 package com.git.activities.utils;
 
+import static java.text.MessageFormat.format;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.git.activities.application.GitApiServiceConfig;
 import com.git.activities.dto.CommitsResponse;
 import com.git.activities.dto.GitRepositoriesResponse;
-import com.git.activities.entities.Repositories;
+import com.git.activities.entities.RepoDetails;
 import com.git.activities.repo.ReposRepository;
 
 @Component
 public class RestTemplateUtility {
 
 	@Autowired
-	RestTemplate serviceTemplate;
+	RestTemplate serviceRestTemplate;
 
 	@Autowired
 	GitApiServiceConfig gitApiServiceConfig;
@@ -34,14 +38,13 @@ public class RestTemplateUtility {
 	@Autowired
 	ReposRepository reposRepository;
 
-	@SuppressWarnings("unchecked")
-	public List<GitRepositoriesResponse> getRepos(String serviceName, String ownerName) {
-		// "repos_url": "https://api.github.com/users/VeeraHighTech/repos",
+	public List<GitRepositoriesResponse> getRepositoryDetailsByOwner(String serviceName, String ownerName) {
 
-		String url = gitApiServiceConfig.getGitApiServiceRepoUrl() + "/users/" + ownerName + "/repos";
+		UriComponentsBuilder builders = UriComponentsBuilder.fromUriString(format(gitApiServiceConfig.getGitApiServiceRepoUrl(), ownerName));
+        String uriBuilder = builders.build().encode().toUriString();
 		List<GitRepositoriesResponse> listOfrepos = new ArrayList<>();
 
-		List<GitRepositoriesResponse> repos = serviceTemplate.getForObject(url, List.class);
+		ResponseEntity<Object[]> repos = serviceRestTemplate.getForEntity(uriBuilder, Object[].class);
 
 		try {
 			String repoResponse = objectMapper.writeValueAsString(repos);
@@ -62,12 +65,12 @@ public class RestTemplateUtility {
 		List<CommitsResponse> commitrResponse = null;
 		List<GitRepositoriesResponse> gitlist = new ArrayList<>();
 		GitRepositoriesResponse repos = new GitRepositoriesResponse();
-		Repositories repository = null;
+		RepoDetails repository = null;
 
 		String url = gitApiServiceConfig.getGitApiServiceRepoUrl() + "/repos/" + ownerName + "/" + serviceName
 				+ "/stats/commit_activity";
 
-		List<CommitsResponse> reposCommits = serviceTemplate.getForObject(url, List.class);
+		List<CommitsResponse> reposCommits = serviceRestTemplate.getForObject(url, List.class);
 		try {
 			String gitCommitString = objectMapper.writeValueAsString(reposCommits);
 			commitrResponse = objectMapper.readValue(gitCommitString, new TypeReference<List<CommitsResponse>>() {
@@ -82,8 +85,7 @@ public class RestTemplateUtility {
 				repos.setCreated_at(repository.getCreatedAt());
 				repos.setUpdated_at(repository.getUpdatedAt());
 				gitlist.add(repos);
-				//dataStoreUtility.saveOrUpdateWeeklyCommits(reposCommits, repository);
-				// dataStoreUtility.saveOrUpdateDailyCommits(gitlist);
+				
 			}
 
 		} catch (IOException e) {

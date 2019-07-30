@@ -24,15 +24,12 @@ public class DataStoreSetup {
 	@Value("${spring.datasource.password}")
 	String databasePassword;
 
-	@Value("${spring.datasource.driver-class-name}")
-	String databaseDriver;
 	
 
 	@Bean
 	public DataSource dataSource() {
 
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-		dataSource.setDriverClassName(databaseDriver);
 		dataSource.setUrl(databaseUrl);
 		dataSource.setUsername(databaseUser);
 		dataSource.setPassword(databasePassword);

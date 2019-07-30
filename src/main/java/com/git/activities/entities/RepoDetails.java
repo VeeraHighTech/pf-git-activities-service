@@ -9,8 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "repositories", schema = "repos_db")
-public class Repositories implements Serializable {
+public class RepoDetails implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 

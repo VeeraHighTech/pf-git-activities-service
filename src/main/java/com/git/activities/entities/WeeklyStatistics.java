@@ -11,8 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "repo_weekly_statistics", schema = "repos_db")
-public class RepoWeeklyStatistics implements Serializable {
+public class WeeklyStatistics implements Serializable {
 
 
 	private static final long serialVersionUID = 1L;

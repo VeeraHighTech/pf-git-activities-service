@@ -10,8 +10,8 @@ import org.springframework.stereotype.Component;
 import com.git.activities.dto.CommitDetails;
 import com.git.activities.dto.CommitsResponse;
 import com.git.activities.dto.GitRepositoriesResponse;
-import com.git.activities.entities.RepoWeeklyStatistics;
-import com.git.activities.entities.Repositories;
+import com.git.activities.entities.WeeklyStatistics;
+import com.git.activities.entities.RepoDetails;
 import com.git.activities.repo.ReposRepository;
 import com.git.activities.repo.WeeklyCommitsRepository;
 
@@ -29,11 +29,11 @@ public class DataStoreUtility {
 
 	public void saveOrUpdateRepos(List<GitRepositoriesResponse> listOfrepos) {
 
-		List<Repositories> listofRepos = new ArrayList<>();
-		Repositories repos = null;
+		List<RepoDetails> listofRepos = new ArrayList<>();
+		RepoDetails repos = null;
 
 		for (GitRepositoriesResponse grep : listOfrepos) {
-			repos = new Repositories();
+			repos = new RepoDetails();
 			repos.setId(grep.getId());
 			repos.setRepoName(grep.getName());
 			repos.setCreatedAt(grep.getCreated_at());
@@ -47,10 +47,10 @@ public class DataStoreUtility {
 
 	}
 
-	public void saveOrUpdateWeeklyCommits(List<CommitsResponse> gitcommitsList, Repositories repository) {
+	public void saveOrUpdateWeeklyCommits(List<CommitsResponse> gitcommitsList, RepoDetails repository) {
 
-		List<RepoWeeklyStatistics> listofWeeklyRepos = new ArrayList<>();
-		RepoWeeklyStatistics weeklystats = null;
+		List<WeeklyStatistics> listofWeeklyRepos = new ArrayList<>();
+		WeeklyStatistics weeklystats = null;
 		List<CommitDetails> cdList = new ArrayList<>();
 		CommitDetails commitDetails = null;
 
@@ -63,7 +63,7 @@ public class DataStoreUtility {
 		}
 
 		for (CommitDetails cDetails : cdList) {
-			weeklystats = new RepoWeeklyStatistics();
+			weeklystats = new WeeklyStatistics();
 			weeklystats.setTotalCommits(cDetails.getTotalnumberOfCommits());
 			weeklystats.setWeekOf(cDetails.getWeekOf());
 			listofWeeklyRepos.add(weeklystats);
