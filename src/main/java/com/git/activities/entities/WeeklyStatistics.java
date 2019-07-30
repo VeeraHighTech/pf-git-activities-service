@@ -2,13 +2,18 @@ package com.git.activities.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class WeeklyStatistics implements Serializable {
@@ -20,14 +25,21 @@ public class WeeklyStatistics implements Serializable {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "repo_id", nullable = false, unique = true)
-    private Long repoId;
-    
-    @Column(name = "week_of", nullable = false)
+    @Column(name = "week_of")
 	private Date weekOf;
 	
     @Column(name = "total_commits")
-	private Long totalCommits;
+	private int totalCommits;
+    
+    
+    @ManyToOne(optional=false)
+    @JoinColumn(name="repoId",referencedColumnName="repo_id", insertable=false, updatable=false)
+    private RepoDetails repo;
+    
+    
+    @OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+    @JoinColumn(name = "week_id", referencedColumnName = "id", nullable = false)
+	public Set<DailyStatistics> dailyStatistics;
     
 
 	public Long getId() {
@@ -38,14 +50,6 @@ public class WeeklyStatistics implements Serializable {
 		this.id = id;
 	}
 
-	public Long getRepoId() {
-		return repoId;
-	}
-
-	public void setRepoId(Long repoId) {
-		this.repoId = repoId;
-	}
-
 	public Date getWeekOf() {
 		return weekOf;
 	}
@@ -54,13 +58,29 @@ public class WeeklyStatistics implements Serializable {
 		this.weekOf = weekOf;
 	}
 
-	public Long getTotalCommits() {
+	public int getTotalCommits() {
 		return totalCommits;
 	}
 
-	public void setTotalCommits(Long totalCommits) {
+	public void setTotalCommits(int totalCommits) {
 		this.totalCommits = totalCommits;
 	}
-    
+
+	public RepoDetails getRepo() {
+		return repo;
+	}
+
+	public void setRepo(RepoDetails repo) {
+		this.repo = repo;
+	}
+
+	public Set<DailyStatistics> getDailyStatistics() {
+		return dailyStatistics;
+	}
+
+	public void setDailyStatistics(Set<DailyStatistics> dailyStatistics) {
+		this.dailyStatistics = dailyStatistics;
+	}
+
     
 }

@@ -1,33 +1,20 @@
 package com.git.activities.utils;
 
-import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import com.git.activities.dto.CommitDetails;
-import com.git.activities.dto.CommitsResponse;
-import com.git.activities.dto.GitRepositoriesResponse;
-import com.git.activities.entities.WeeklyStatistics;
-import com.git.activities.entities.RepoDetails;
-import com.git.activities.repo.ReposRepository;
-import com.git.activities.repo.WeeklyCommitsRepository;
 
 @Component
 public class DataStoreUtility {
 
-	@Autowired
+	/*@Autowired
 	ReposRepository reposRepository;
 
 	@Autowired
 	WeeklyCommitsRepository weeklyCommitsRepository;
 
 	@Autowired
-	DateConvertionUtility dateConvertionUtility;
+	DateConvertionUtility dateConvertionUtility;*/
 
-	public void saveOrUpdateRepos(List<GitRepositoriesResponse> listOfrepos) {
+	/*public void saveOrUpdateRepos(List<GitRepositoriesResponse> listOfrepos) {
 
 		List<RepoDetails> listofRepos = new ArrayList<>();
 		RepoDetails repos = null;
@@ -45,9 +32,9 @@ public class DataStoreUtility {
 			reposRepository.saveAll(listofRepos);
 		}
 
-	}
+	}*/
 
-	public void saveOrUpdateWeeklyCommits(List<CommitsResponse> gitcommitsList, RepoDetails repository) {
+	/*public void saveOrUpdateWeeklyCommits(List<CommitsResponse> gitcommitsList, RepoDetails repository) {
 
 		List<WeeklyStatistics> listofWeeklyRepos = new ArrayList<>();
 		WeeklyStatistics weeklystats = null;
@@ -72,11 +59,11 @@ public class DataStoreUtility {
 		if (listofWeeklyRepos != null) {
 			weeklyCommitsRepository.deleteAll();
 			weeklyCommitsRepository.saveAll(listofWeeklyRepos);
-		}
+		}*/
 
-	}
+	/*}
 
 	public void saveOrUpdateDailyCommits(List<GitRepositoriesResponse> listOfrepos) {
 
-	}
+	}*/
 }

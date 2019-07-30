@@ -10,7 +10,7 @@ public class GitApiServiceConfig {
 	private String gitApiServiceRepoUrl;
 
 	@Value("${git.api.repo.stats.url}")
-	private String gitApiServiceUserName;
+	private String gitApiRepoStatsUrl;
 	
 
 
@@ -23,15 +23,13 @@ public class GitApiServiceConfig {
 		this.gitApiServiceRepoUrl = gitApiServiceRepoUrl;
 	}
 
-	public String getGitApiServiceUserName() {
-		return gitApiServiceUserName;
+	public String getGitApiRepoStatsUrl() {
+		return gitApiRepoStatsUrl;
 	}
 
-	public void setGitApiServiceUserName(String gitApiServiceUserName) {
-		this.gitApiServiceUserName = gitApiServiceUserName;
+	public void setGitApiRepoStatsUrl(String gitApiRepoStatsUrl) {
+		this.gitApiRepoStatsUrl = gitApiRepoStatsUrl;
 	}
-
-	
 
 	
 }

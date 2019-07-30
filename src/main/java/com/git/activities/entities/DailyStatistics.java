@@ -8,7 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 @Entity
 public class DailyStatistics implements Serializable {
 
@@ -19,14 +20,16 @@ public class DailyStatistics implements Serializable {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "repo_id", nullable = false, unique = true)
-    private Long repoId;
-    
-    @Column(name = "day", nullable = false)
+    @Column(name = "day")
 	private Date day;
 	
     @Column(name = "total_commits")
-	private Long totalCommits;
+	private Integer totalCommits;
+    
+    
+    @ManyToOne(optional=false)
+    @JoinColumn(name="week_id",referencedColumnName="id", insertable=false, updatable=false)
+    private WeeklyStatistics week;
     
     
 
@@ -38,14 +41,6 @@ public class DailyStatistics implements Serializable {
 		this.id = id;
 	}
 
-	public Long getRepoId() {
-		return repoId;
-	}
-
-	public void setRepoId(Long repoId) {
-		this.repoId = repoId;
-	}
-
 	public Date getDay() {
 		return day;
 	}
@@ -54,13 +49,20 @@ public class DailyStatistics implements Serializable {
 		this.day = day;
 	}
 
-	public Long getTotalCommits() {
+	public Integer getTotalCommits() {
 		return totalCommits;
 	}
 
-	public void setTotalCommits(Long totalCommits) {
+	public void setTotalCommits(Integer totalCommits) {
 		this.totalCommits = totalCommits;
 	}
-    
 
+	public WeeklyStatistics getWeek() {
+		return week;
+	}
+
+	public void setWeek(WeeklyStatistics week) {
+		this.week = week;
+	}
+    
 }

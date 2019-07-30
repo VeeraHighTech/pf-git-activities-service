@@ -1,12 +1,16 @@
 package com.git.activities.entities;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 
 @Entity
 public class RepoDetails implements Serializable {
@@ -14,45 +18,88 @@ public class RepoDetails implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name = "id", nullable = false, unique = true)
-	private Long Id;
+	@Column(name = "repo_id")
+	private Integer repoId;
 	
-	@Column(name = "repo_name", nullable = false, unique = true)
-	private String repoName;
+	@Column(name = "repo_name")
+	private String name;
 	
 	@Column(name = "created_at")
-	private Date createdAt;
+	private String createdAt;
 	
 	@Column(name = "updated_at")
-	private Date updatedAt;
+	private String updatedAt;
 	
+	@Column(name = "repo_owner")
+    private String ownerName;
 	
+	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+    @JoinColumn(name = "repoId", referencedColumnName = "repo_id", nullable = false)
+	    public Set<WeeklyStatistics> weeklyStatistics;
 	
-	public Long getId() {
-		return Id;
+
+	public RepoDetails() {
+		super();
+		
 	}
-	public void setId(Long id) {
-		Id = id;
+
+	public RepoDetails(Integer repoId, String name, String createdAt, String updatedAt, String ownerName) {
+		super();
+		this.repoId = repoId;
+		this.name = name;
+		this.createdAt = createdAt;
+		this.updatedAt = updatedAt;
+		this.ownerName = ownerName;
 	}
-	public String getRepoName() {
-		return repoName;
+
+	public Integer getRepoId() {
+		return repoId;
 	}
-	public void setRepoName(String repoName) {
-		this.repoName = repoName;
+
+	public void setRepoId(Integer repoId) {
+		this.repoId = repoId;
 	}
-	public Date getCreatedAt() {
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getCreatedAt() {
 		return createdAt;
 	}
-	public void setCreatedAt(Date createdAt) {
+
+	public void setCreatedAt(String createdAt) {
 		this.createdAt = createdAt;
 	}
-	public Date getUpdatedAt() {
+
+	public String getUpdatedAt() {
 		return updatedAt;
 	}
-	public void setUpdatedAt(Date updatedAt) {
+
+	public void setUpdatedAt(String updatedAt) {
 		this.updatedAt = updatedAt;
 	}
-	
+
+	public String getOwnerName() {
+		return ownerName;
+	}
+
+	public void setOwnerName(String ownerName) {
+		this.ownerName = ownerName;
+	}
+
+	public Set<WeeklyStatistics> getWeeklyStatistics() {
+		return weeklyStatistics;
+	}
+
+	public void setWeeklyStatistics(Set<WeeklyStatistics> weeklyStatistics) {
+		this.weeklyStatistics = weeklyStatistics;
+	}
+
 }
 
     

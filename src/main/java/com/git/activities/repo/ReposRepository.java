@@ -8,5 +8,5 @@ import com.git.activities.entities.RepoDetails;
 @Repository
 public interface ReposRepository extends JpaRepository<RepoDetails, Long> {
 
-	public RepoDetails findByRepoName(String repoName);
+	//public RepoDetails findByRepoName(String repoName);
 }
