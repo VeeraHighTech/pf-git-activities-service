@@ -50,7 +50,6 @@ public class GitActivitiyController {
 			@ApiParam(value = "repo-name") @PathVariable(name = "repo-name") String serviceName,
             @ApiParam(value = "git-token") @RequestHeader(value = "git-token") String token)  {
          
-
 		ResponseEntity<Object> responseEntity = null;
 
 		try {
@@ -96,7 +95,6 @@ public class GitActivitiyController {
 
 		return responseEntity;
 	}
-
 
 
 
